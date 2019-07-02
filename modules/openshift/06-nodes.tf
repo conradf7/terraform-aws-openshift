@@ -7,7 +7,7 @@ resource "aws_key_pair" "keypair" {
 //  Create the master userdata script.
 data "template_file" "setup-master" {
   template = "${file("${path.module}/files/setup-master.sh")}"
-  vars {
+  vars = {
     availability_zone = "${data.aws_availability_zones.azs.names[0]}"
   }
 }
@@ -20,7 +20,7 @@ resource "aws_eip" "master_eip" {
 
 //  Launch configuration for the consul cluster auto-scaling group.
 resource "aws_instance" "master" {
-  ami                  = "${data.aws_ami.rhel7_5.id}"
+  ami = "${data.aws_ami.rhel7_5.id}"
   # Master nodes require at least 16GB of memory.
   instance_type        = "m4.xlarge"
   subnet_id            = "${aws_subnet.public-subnet.id}"
@@ -61,7 +61,7 @@ resource "aws_instance" "master" {
 //  Create the node userdata script.
 data "template_file" "setup-node" {
   template = "${file("${path.module}/files/setup-node.sh")}"
-  vars {
+  vars = {
     availability_zone = "${data.aws_availability_zones.azs.names[0]}"
   }
 }

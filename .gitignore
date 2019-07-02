@@ -1,5 +1,5 @@
 # Infrastructure ignores.
-.terraform
+.terraform/
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
@@ -8,3 +8,6 @@ terraform.tfstate.backup
 inventory.cfg
 *.lock.info
 .private.env
+
+# runtime helpers
+.install/
